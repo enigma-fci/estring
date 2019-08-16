@@ -335,6 +335,28 @@ estring estring::erase(int x, int y)
 	return this->str;
 }
 
+estring estring::slice(int x, int y)
+{
+	if (y == 0) 
+		y = length();
+	if (x > y || (x < 0 && y != length()) || y > length())
+		return "Error";
+	char* temp;
+	if (x < 0) {
+		temp = new char[-x + 1];
+		for (int i = 0, j = x; y + j < y; i++, j++)
+			temp[i] = str[y + j];
+		temp[-x] = '\0';
+	}
+	else {
+		temp = new char[y - x + 1];
+		for (int i = 0, j = x; j <= y; i++, j++)
+			temp[i] = str[j];
+		temp[y - x + 1] = '\0';
+	}
+	return temp;
+}
+
 
 estring::~estring() {
   // free old memory
