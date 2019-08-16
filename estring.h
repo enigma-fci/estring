@@ -25,7 +25,9 @@ class estring
     bool operator == (const char str[]);
     bool operator == (const estring& str);
     friend bool operator == (const char str[],const estring& ob);
-
+    
+    estring e_erase(int start_i, int end_i); // erase method
+    
     // cin >> & cout << overloading
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
