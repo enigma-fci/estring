@@ -26,10 +26,6 @@ class estring
     bool operator == (const estring& str);
     friend bool operator == (const char str[],const estring& ob);
 
-    // plus equal operator overloading
-    void operator += (const char str[]);
-    void operator += (const estring& str);
-
     // cin >> & cout << overloading
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
