@@ -134,25 +134,6 @@ bool operator == (const char str[], const estring& ob) {
 }
 
 
-/*************************
-     e_reverse method
-**************************/
-estring estring::e_reverse(void) {
-  // get index number
-  int l = 0;
-  while(str[l] != '\0') l++;
-  l--;
-
-  char t;
-  // loop and swap each char in the first half whit it correspondence
-  for(int i = 0; i <= l / 2; i++) {
-    // simple swap
-    t = str[i];     // store char at index i in temp variable
-    str[i] = str[l - i];  // set correspondence char at index l - i to index i
-    str[l - i] = t;   // set char at index l - i  to temp;
-  }
-  return this->str;
-}
 
 /***********************
     e_erase method
