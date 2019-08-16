@@ -65,7 +65,7 @@ void estring::operator = (const estring& str) {
 /***************************************
    array index operator overloading
 ****************************************/
-char estring::operator[] (int index)  {
+char& estring::operator[] (int index)  {
   // get the length
   int l = 0;
   while(str[l] != '\0') l++;
@@ -633,7 +633,7 @@ estring estring::erase(int x, int y)
 
 estring estring::slice(int x, int y)
 {
-	if (y == 0) 
+	if (y == 0)
 		y = length();
 	if (x > y || (x < 0 && y != length()) || y > length())
 		return "Error";

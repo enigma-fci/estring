@@ -19,13 +19,13 @@ class estring
     void operator = (const estring& str);
 
     // array index operator overloading
-    char operator[] (int index);
+    char& operator[] (int index);
 
     // equality operator overloading
     bool operator == (const char str[]);
     bool operator == (const estring& str);
     friend bool operator == (const char str[],const estring& ob);
-    
+
     // plus equal operator overloading
     void operator += (const char str[]);
     void operator += (const estring& str);
@@ -46,11 +46,11 @@ class estring
     estring e_reverse(void);   // e_reverse method
     estring toLoweCase(void);  // to lower case method
     estring e_erase(int start_i, int end_i); // erase method
-    
+
     // cin >> & cout << overloading
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
-  
+
     int length();
 		char charAt(int x);
 		int charCodeAt(int x);
@@ -63,7 +63,7 @@ class estring
   	bool operator!=(estring e);
   	estring erase(int x, int y);
   	estring slice(int x, int y);
-    
+
     ~estring();
 };
 
