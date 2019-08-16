@@ -32,9 +32,9 @@ class estring
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
   
-    int length();
+    	int length();
   	char charAt(int x);
-	  int charCodeAt(int x);
+	int charCodeAt(int x);
   	int indexOf(estring e, int x = 0);
   	int lastIndexOf(estring e, int x = 0);
   	estring trim();
