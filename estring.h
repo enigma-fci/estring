@@ -31,6 +31,19 @@ class estring
     // cin >> & cout << overloading
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
+  
+    int length();
+  	char charAt(int x);
+	  int charCodeAt(int x);
+  	int indexOf(estring e, int x = 0);
+  	int lastIndexOf(estring e, int x = 0);
+  	estring trim();
+  	estring padStart(int x, estring e = " ");
+  	estring toUpperCase();
+  	int count(estring e);
+  	bool operator!=(estring e);
+  	estring erase(int x, int y);
+  	estring slice(int x, int y);
     
     ~estring();
 };
