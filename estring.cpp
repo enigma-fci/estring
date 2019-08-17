@@ -653,6 +653,54 @@ estring estring::slice(int x, int y)
 	return temp;
 }
 
+estring estring::replace(estring e1, estring e2)
+{
+	int le1 = e1.length(), le2 = e2.length(), lo = this->length(), count = 0;
+	bool test;
+	for (int i = 0; i < lo; i++) {
+		test = true;
+		if (this->str[i - 1] != ' ') test = false;
+		for (int j = 0; j < le1; j++) {
+			if (this->str[i + j] != e1.str[j]) {
+				test = false;
+				break;
+			}
+		}
+		if (test) {
+			count++;
+		}
+	}
+	int *t = new int[count], f = 0;
+	for (int i = 0; i < lo; i++) {
+		test = true;
+		if (this->str[i - 1] != ' ') test = false;
+		for (int j = 0; j < le1; j++) {
+			if (this->str[i + j] != e1.str[j]) {
+				test = false;
+				break;
+			}
+		}
+		if (test) {
+			t[f] = i;
+			f++;
+		}
+	}
+	int lt = lo + count * (le2 - le1);
+	char* temp = this->str;
+	this->str = new char[lt];
+	for (int i = 0, j = 0; i < lt; i++, j++) {
+		for (int k = 0; k < count; k++) {
+			if (j == t[k]) {
+				for (int l = 0; l < le2; l++, i++)
+					this->str[i] = e2.str[l];
+				for (int l = 0; l < le1; l++, j++);
+			}
+		}
+		this->str[i] = temp[j];
+	}
+	return this->str;
+}
+
 
 estring::~estring() {
   // free old memory
