@@ -63,6 +63,7 @@ class estring
   	bool operator!=(estring e);
   	estring erase(int x, int y);
   	estring slice(int x, int y);
+	estring replace(estring e1, estring e2);
 
     ~estring();
 };
