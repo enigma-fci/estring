@@ -13,6 +13,7 @@ class estring
     // constructors
     estring();
     estring(const char str[]);
+    estring(const estring& str);
 
     // assignment operator overloading
     void operator = (const char str[]);
@@ -51,7 +52,7 @@ class estring
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
 
-    int length();
+    int length() const;
 		char charAt(int x);
 		int charCodeAt(int x);
   	int indexOf(estring e, int x = 0);

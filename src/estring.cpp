@@ -18,10 +18,22 @@ estring::estring(const char str[]) : str(0) {
   // allocate new memory space
   this->str = new char[l + 1];
   // copy every char to our str
-  while(l >= 0) {
+  for(;l >= 0; l--)
     this->str[l] = str[l];
-    l--;
-  }
+}
+estring::estring(const estring& str) : str(0) {
+  // get the length of parameter str
+  int l = str.length();
+
+  // free old memory
+  delete[] this->str;
+  this->str = 0;
+
+  // allocate new memory space
+  this->str = new char[l + 1];
+  // copy every char to our str
+  for(;l >= 0; l--)
+    this->str[l] = str.str[l];
 }
 
 /****************************************
@@ -38,16 +50,15 @@ void estring::operator = (const char str[]) {
 
   // allocate new memory space
   this->str = new char[l + 1];
-  while(l >= 0) {
+
+  // copy every char to this str
+  for(;l >= 0; l--)
     this->str[l] = str[l];
-    l--;
-  }
 }
 
 void estring::operator = (const estring& str) {
   // get the length of parameter str
-  int l = 0;
-  while(str.str[l] != '\0') l++;
+  int l = str.length();
 
   // free old memory
   delete[] this->str;
@@ -55,25 +66,16 @@ void estring::operator = (const estring& str) {
 
   // allocate new memory space
   this->str = new char[l + 1];
-  // copy every char to our str
-  while(l >= 0) {
+
+  // copy every char to this str
+  for(;l >= 0; l--)
     this->str[l] = str.str[l];
-    l--;
-  }
 }
 
 /***************************************
    array index operator overloading
 ****************************************/
-char& estring::operator[] (int index)  {
-  // get the length
-  int l = 0;
-  while(str[l] != '\0') l++;
-
-  if (index >= l)
-      index = --l;
-  return str[index];
-}
+char& estring::operator[] (int index)  {return str[index];}
 
 /**************************************
     equality operator overloading
@@ -84,33 +86,24 @@ bool estring::operator == (const char str[]) {
   while(str[pl] != '\0') pl++;
 
   // get the length of object str
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
+  int ol = this->length();
 
   if(pl != ol) return false;
   // compare each char with it corresponded
-  while(ol >= 0) {
+  for(;ol >= 0; ol--)
     if(this->str[ol] != str[ol]) return false;
-    ol--;
-  }
 
   return true;
 }
 
 bool estring::operator == (const estring& str){
-  // get the length of parameter str
-  int pl = 0;
-  while(str.str[pl] != '\0') pl++;
-  // get the length of object str
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
+  int pl = str.length();   // get the length of parameter str
+  int ol = this->length(); // get the length of object str
 
   if(pl != ol) return false;
   // compare each char with it corresponded
-  while(ol >= 0) {
+  for(;ol >= 0; ol--)
     if(this->str[ol] != str.str[ol]) return false;
-    ol--;
-  }
 
   return true;
 }
@@ -120,15 +113,12 @@ bool operator == (const char str[], const estring& ob) {
   int pl = 0;
   while(str[pl] != '\0') pl++;
   // get the length of object str
-  int ol = 0;
-  while(ob.str[ol] != '\0') ol++;
+  int ol = ob.length();
 
   if(pl != ol) return false;
   // compare each char with it correspondence
-  while(ol >= 0) {
+  for(;ol >= 0; ol--)
     if(ob.str[ol] != str[ol]) return false;
-    ol--;
-  }
 
   return true;
 }
@@ -138,8 +128,7 @@ bool operator == (const char str[], const estring& ob) {
 ***************************************/
 void estring::operator += (const char str[]) {
   // get length of my str
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
+  int ol = this->length();
 
   // get the length of parameter str
   int pl = 0;
@@ -168,12 +157,10 @@ void estring::operator += (const char str[]) {
 
 void estring::operator += (const estring& str) {
   // get length of my str
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
+  int ol = this->length();
 
   // get the length of parameter str
-  int pl = 0;
-  while(str.str[pl] != '\0') pl++;
+  int pl = str.length();
 
   // copy my str in temp variable
   char *t =  this->str;
@@ -201,14 +188,12 @@ void estring::operator += (const estring& str) {
 ***************************/
 bool estring::e_includes(const char str[]) {
   // get index number
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
-  ol--;
+  int ol = this->length() - 1;
 
   // get index number
   int pl = 0;
-  while(str[pl] != '\0') pl++;          // remove null char index to
-  pl--;                                 // compare letters only
+  while(str[pl] != '\0') pl++;
+  pl--;
 
   // matching for one char
   if(!pl) {
@@ -232,14 +217,10 @@ bool estring::e_includes(const char str[]) {
 
 bool estring::e_includes(const estring& str) {
   // get index number
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
-  ol--;
+  int ol = this->length() - 1;
 
   // get index number
-  int pl = 0;
-  while(str.str[pl] != '\0') pl++;        // remove null char index to
-  pl--;                                   // compare letters only
+  int pl = str.length() -1 ;
 
   // matching for one char
   if(!pl) {
@@ -266,9 +247,7 @@ bool estring::e_includes(const estring& str) {
 *************************/
 bool estring::endsWith(const char str[], int index) {
   // get index number
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
-  ol--;
+  int ol = this->length() - 1;
 
   if(index > 0 && index < ol) ol = index;
 
@@ -288,16 +267,12 @@ bool estring::endsWith(const char str[], int index) {
 
 bool estring::endsWith(const estring& str, int index) {
   // get index number
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
-  ol--;
+  int ol = this->length() - 1;
 
   if(index > 0 && index < ol) ol = index;
 
   // get index number
-  int pl = 0;
-  while(str.str[pl] != '\0') pl++;
-  pl--;
+  int pl = str.length() - 1;
 
   if(pl > ol) return false;
 
@@ -313,8 +288,7 @@ bool estring::endsWith(const estring& str, int index) {
 ************************/
 estring estring::padEnd(int len, const char str[]) {
   // get the length of my str
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
+  int ol = this->length();
 
   if (ol >= len) return this->str;
 
@@ -343,15 +317,13 @@ estring estring::padEnd(int len, const char str[]) {
 }
 
 estring estring::padEnd(int len, const estring& str) {
-    // get the length of my str
-  int ol = 0;
-  while(this->str[ol] != '\0') ol++;
+  // get the length of my str
+  int ol = this->length();
 
   if (ol >= len) return this->str;
 
   // get the length of parameter str
-  int pl = 0;
-  while(str.str[pl] != '\0') pl++;
+  int pl = str.length();
 
   char *t = this->str;
   this->str = new char[len + 1]; // for null char
@@ -376,18 +348,15 @@ estring estring::padEnd(int len, const estring& str) {
 /*************************
     trim right method
 **************************/
-// working functionality  good for memory
 estring estring::trimRight(void){
   // get index number
-  int l = 0;
-  while(str[l] != '\0') l++;
-  l--;
+  int l = this->length() - 1;
 
   for(;l >= 0 && str[l] == ' '; l--)
     str[l] = '\0';
 
   char *t = str;
-  str = new char[l + 2]; // for null char and convert from index to length
+  str = new char[l + 2];
 
   for(int i = 0; i <= l; i++)
     str[i] = t[i];
@@ -405,9 +374,7 @@ estring estring::trimRight(void){
 **************************/
 estring estring::e_reverse(void) {
   // get index number
-  int l = 0;
-  while(str[l] != '\0') l++;
-  l--;
+  int l = length() - 1;
 
   char t;
   // loop and swap each char in the first half whit it correspondence
@@ -436,8 +403,7 @@ estring estring::toLoweCase (void) {
 ************************/
 estring estring::e_erase(int start_i, int end_i) {
   // get the length
-  int l = 0;
-  while(str[l] != 0) l++;
+  int l = this->length();
 
   // check some condition
   if(start_i < 0 || end_i < 0) return this->str;
@@ -449,8 +415,7 @@ estring estring::e_erase(int start_i, int end_i) {
 
   // copy t in str without letters between start and end index
   for(int i = 0, j = 0; j <= l; i++, j++)
-    (j < start_i || j > end_i)?
-      str[i] = t[j] : i--;
+    (j < start_i || j > end_i)? str[i] = t[j] : i--;
 
   // free t memory
   delete [] t;
@@ -490,29 +455,20 @@ istream & operator >> (istream &in, estring &str) {
   return in;
 }
 
-int estring::length()
-{
+int estring::length() const {
 	int length;
 	for (length = 0; str[length] != '\0'; length++);
 	return length;
 }
 
-char estring::charAt(int x)
-{
 
-	return str[x];
-}
+char estring::charAt(int x) { return str[x];}
+int estring::charCodeAt(int x) {return str[x];}
 
-int estring::charCodeAt(int x) {
-	return str[x];
-}
-
-int estring::indexOf(estring e, int x)
-{
+int estring::indexOf(estring e, int x) {
 	// get length of the new string
-	int le, lo = this->length();
+	int le = e.length(), lo = this->length();
 	bool test;
-	for (le = 0; e.str[le] != '\0'; le++);
 	for (int i = x; i < lo; i++) {
 		test = true;
 		for (int j = 0; j < le; j++) {
