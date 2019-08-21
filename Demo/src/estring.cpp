@@ -1,7 +1,5 @@
 #include "estring.h"
 
-
-
 /********************
     constructors
 ********************/
@@ -185,7 +183,7 @@ void estring::operator += (const estring& str) {
 
 /**************************
      e_includes method
-***************************/
+***************************//*
 bool estring::e_includes(const char str[]) {
   // get index number
   int ol = this->length() - 1;
@@ -214,7 +212,7 @@ bool estring::e_includes(const char str[]) {
 
   return false;
 }
-
+*/
 bool estring::e_includes(const estring& str) {
   // get index number
   int ol = this->length() - 1;
@@ -455,80 +453,137 @@ istream & operator >> (istream &in, estring &str) {
   return in;
 }
 
+
+/*************************
+      length method
+**************************/
 int estring::length() const {
 	int length;
 	for (length = 0; str[length] != '\0'; length++);
 	return length;
 }
 
-
+/**********************************
+  char At & char Code At methods
+***********************************/
 char estring::charAt(int x) { return str[x];}
 int estring::charCodeAt(int x) {return str[x];}
 
-int estring::indexOf(estring e, int x) {
-	// get length of the new string
+/*************************
+      index of method
+**************************/
+int estring::indexOf(const estring& e, int x) {
+	// get length of parameter str and this str
 	int le = e.length(), lo = this->length();
-	bool test;
-	for (int i = x; i < lo; i++) {
-		test = true;
-		for (int j = 0; j < le; j++) {
-			if (this->str[i + j] != e.str[j]) {
-				test = false;
-				break;
-			}
-		}
-		if (test) return i;
-	}
-	return -1;
+
+  // validate some conditions
+	if(x < 0 || x >= lo || le > lo) return -1;
+
+	bool found;
+
+	for (int i = x; i < lo; i++, found = true) { // for each char
+		for (int j = 0; j < le; j++)  // matching for e string
+      if (! (found = this->str[i + j] == e.str[j])) // if one char doesn't match
+        break; // then break the loop
+
+		if (found) return i;  // if found return start index
+  }
+
+	return -1; // if not found return -1
 }
 
-int estring::lastIndexOf(estring e, int x)
-{
-	int le, lo = this->length();
-	bool test;
-	for (le = 0; e.str[le] != '\0'; le++);
-	for (int i = lo - 1; i >= x; i--) {
-		test = true;
-		for (int j = le - 1; j >= 0; j--) {
-			if (this->str[i - j] != e.str[j]) {
-				test = false;
-				break;
-			}
-		}
-		if (test) return i;
+/****************************
+     last index of method
+*****************************/
+int estring::lastIndexOf(const estring& e, int x) {
+	// get index of parameter str and this str
+	int le = e.length() - 1, lo = this->length() - 1;
+
+  // validate some conditions
+  if(x < 0 || x >= lo || le > lo) return -1;
+
+	bool found;
+
+	for (int i = lo; i >= x; i--, found = true) { // for each char
+		for (int j = le; j >= 0; j--) // matching for e string
+			if (!(found = this->str[i - j] == e.str[j])) // if one char doesn't match
+				break;  // then break the loop
+
+		if (found) return i; // if found return start index
 	}
-	return -1;
+
+	return -1; // if not found return -1
 }
 
-estring estring::trim()
-{
-	int l = this->length(), lss = 0, lse = 0;
+/**********************
+      trim method
+***********************/
+estring estring::trim() {
+  // get the index count of this str
+	int l = this->length() - 1, lss = 0;
+
+	// copy this str to temp
 	char* temp = this->str;
-	for (int i = 0; i < l; i++)
-		if (str[i] == ' ')
-			lss++;
-		else
-			break;
-	for (int i = l - 1; i >= 0; i--)
-		if (str[i] == ' ')
-			lse++;
-		else
-			break;
-	this->str = new char[l - (lss + lse)];
-	for (int i = lss, j = 0; i < l- lse; i++, j++)
-		this->str[j] = temp[i];
-	this->str[l - (lss + lse)] = '\0';
-	delete[] temp;
-	return this->str;
+
+	// get first index of string not space and store it at lss
+	for (int i = 0; i < l, str[i] == ' '; i++, lss++);
+
+  // get the last index of string not space and store it at lss
+	for (; l >= 0, str[l] == ' '; l--);
+
+  // if the string is only space
+  if(l = -1) {
+    delete [] temp;   // free temp memory
+    this->str = new char [1];   // allocate only 1 char space
+    this->str = "";   // set it to null char
+    return *this;     // return and end the function
+  }
+
+	this->str = new char[++l - lss + 1]; // allocate new memory
+
+	for (int i = lss, j = 0; i <= l; i++, j++) // copy each char between
+		this->str[j] = temp[i];                       // lss and l
+
+	this->str[l - lss] = '\0'; // add null char
+
+	delete[] temp; // free temp memory
+
+	return *this;
 }
 
-estring estring::padStart(int x, estring e)
-{
-	for (int i = 0; i < x; i++) {
-		str--;
-		str[0] = e.str[0];
-	}
-	return this->str;
+/**********************
+    pad start method
+***********************/
+estring estring::padStart(int len, const estring& str) {
+  // get the length of this str
+  int ol = this->length();
+
+  if (ol >= len) return this->str;
+
+  // get the length of parameter str
+  int pl = str.length();
+
+  // copy this str to temp
+  char *t = this->str;
+
+  // allocate new memory for this str
+  this->str = new char[len + 1];
+
+  // add the str and repeat until the location of original str
+  for(int i = 0, j = 0; i < len - ol; i++, j++, j %= pl)
+    this->str[i] = str.str[j];
+
+  // add original string at the end
+  for(int i = 0, j = len - ol ; i < ol; j++, i++)
+    this->str[j] = t[i];
+
+  // add null char
+  this->str[len] = '\0';
+
+  // free t memory
+  delete [] t;
+
+  return *this;
 }
 
 estring estring::toUpperCase()
@@ -656,7 +711,7 @@ estring estring::replace(estring e1, estring e2)
 	}
 	return this->str;
 }
-
+/*
 estring estring::toString(int x, int y)
 {
 	int l = 0;
@@ -672,7 +727,7 @@ estring estring::toString(int x, int y)
 	}
 	return e;
 }
-
+*/
 estring::~estring() {
   // free old memory
   delete [] str;

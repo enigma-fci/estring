@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1566388746 source:c:\users\easy\desktop\estring\estring\demo\main.cpp
+1566401022 source:c:\users\easy\desktop\estring\estring\demo\main.cpp
 	<iostream>
 	"estring.h"
 
-1566388937 c:\users\easy\desktop\estring\estring\demo\include\estring.h
+1566399991 c:\users\easy\desktop\estring\estring\demo\include\estring.h
 	<iostream>
 
-1566391796 source:c:\users\easy\desktop\estring\estring\demo\src\estring.cpp
+1566401070 source:c:\users\easy\desktop\estring\estring\demo\src\estring.cpp
 	"estring.h"
 

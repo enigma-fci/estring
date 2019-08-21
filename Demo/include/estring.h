@@ -32,7 +32,7 @@ class estring
     void operator += (const estring& str);
 
     // e_includes method
-    bool e_includes(const char str[]);
+    //bool e_includes(const char str[]);
     bool e_includes(const estring& str);
 
     // endsWith method
@@ -55,17 +55,17 @@ class estring
     int length() const;
 		char charAt(int x);
 		int charCodeAt(int x);
-  	int indexOf(estring e, int x = 0);
-  	int lastIndexOf(estring e, int x = 0);
+  	int indexOf(const estring& e, int x = 0);
+  	int lastIndexOf(const estring& e, int x = 0);
   	estring trim();
-  	estring padStart(int x, estring e = " ");
+  	estring padStart(int len, const estring& e = " ");
   	estring toUpperCase();
   	int count(estring e);
   	bool operator!=(estring e);
   	estring erase(int x, int y);
   	estring slice(int x, int y);
 	estring replace(estring e1, estring e2);
-	estring toString(int x, int y = 10);
+	//estring toString(int x, int y = 10);
 
     ~estring();
 };

@@ -5,13 +5,14 @@ using namespace std;
 int main()
 {
 
-  estring e1 = "Hello World!";
-  estring e2("Hello World!");
-  char x [] = "sdsa";
+  estring e1 = "hi this is hi and hi but wait there is another hi here or hi there World!";
+  estring  t = "name";
 
 
-  cout << e1.e_includes("world!") << endl;
-  cout << e1[-1] << endl;
+  cout << e1.e_includes("World!") << endl;
+  cout << e1.indexOf("hi") << endl;
+  cout << t << "d"  << endl;
+  cout << t.padStart(20, "1234567890") << endl;
 
   return 0;
 }
