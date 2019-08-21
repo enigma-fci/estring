@@ -183,7 +183,7 @@ void estring::operator += (const estring& str) {
 
 /**************************
      e_includes method
-***************************//*
+***************************/
 bool estring::e_includes(const char str[]) {
   // get index number
   int ol = this->length() - 1;
@@ -212,7 +212,7 @@ bool estring::e_includes(const char str[]) {
 
   return false;
 }
-*/
+
 bool estring::e_includes(const estring& str) {
   // get index number
   int ol = this->length() - 1;

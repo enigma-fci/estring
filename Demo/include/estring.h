@@ -32,7 +32,7 @@ class estring
     void operator += (const estring& str);
 
     // e_includes method
-    //bool e_includes(const char str[]);
+    bool e_includes(const char str[]);
     bool e_includes(const estring& str);
 
     // endsWith method
