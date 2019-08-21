@@ -701,6 +701,21 @@ estring estring::replace(estring e1, estring e2)
 	return this->str;
 }
 
+estring estring::toString(int x, int y)
+{
+	int l = 0;
+	while (x > pow(y, l)) {
+		l++;
+	}
+	estring e = new char[l + 1];
+	e.str[l] = '\0';
+	while (x) {
+		l--;
+		e.str[l] = ((x % y) < 10)? (x % y) + 48: (x % y) + 87;
+		x /= y;
+	}
+	return e;
+}
 
 estring::~estring() {
   // free old memory
