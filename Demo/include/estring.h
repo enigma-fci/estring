@@ -2,6 +2,7 @@
 #define ESTRING_H
 
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -64,8 +65,8 @@ class estring
   	bool operator!=(const estring& e);
   	estring erase(int start_i, int end_i);
   	estring slice(int x, int y);
-	estring replace(estring e1, estring e2);
-	//estring toString(int x, int y = 10);
+    estring replace(estring e1, estring e2);
+    static estring toString(int x, int y = 10);
 
     ~estring();
 };

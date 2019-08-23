@@ -645,7 +645,6 @@ estring estring::erase(int start_i, int end_i) {
 
   // copy str and reallocate memory
   char *t = str;
-  // allocate new memory
   str = new char[l - (end_i - start_i)];
 
   // copy t in str without letters between start and end index
@@ -683,54 +682,48 @@ estring estring::slice(int x, int y) {
 	return temp;
 }
 
-estring estring::replace(estring e1, estring e2)
-{
-	int le1 = e1.length(), le2 = e2.length(), lo = this->length(), count = 0;
-	bool test;
-	for (int i = 0; i < lo; i++) {
-		test = true;
-		if (this->str[i - 1] != ' ') test = false;
-		for (int j = 0; j < le1; j++) {
-			if (this->str[i + j] != e1.str[j]) {
-				test = false;
-				break;
-			}
-		}
-		if (test) {
-			count++;
-		}
-	}
-	int *t = new int[count], f = 0;
-	for (int i = 0; i < lo; i++) {
-		test = true;
-		if (this->str[i - 1] != ' ') test = false;
-		for (int j = 0; j < le1; j++) {
-			if (this->str[i + j] != e1.str[j]) {
-				test = false;
-				break;
-			}
-		}
-		if (test) {
-			t[f] = i;
-			f++;
-		}
-	}
-	int lt = lo + count * (le2 - le1);
-	char* temp = this->str;
-	this->str = new char[lt];
-	for (int i = 0, j = 0; i < lt; i++, j++) {
-		for (int k = 0; k < count; k++) {
-			if (j == t[k]) {
-				for (int l = 0; l < le2; l++, i++)
-					this->str[i] = e2.str[l];
-				for (int l = 0; l < le1; l++, j++);
-			}
-		}
-		this->str[i] = temp[j];
-	}
-	return this->str;
+estring estring::replace(estring e1, estring e2) {
+	 // get the length of all strings
+  int l1 = e1.length(), l2 = e2.length(), lo= this->length();
+
+  if (l1 > lo || l1 == 0) return this->str;
+
+  // allocate memory for temp
+  char *temp = new char[(l1 == l2)? lo + 1 : lo + (this->count(e2) * (l2 - l1)) + 1];
+
+  // put str in temp with replace each t2 with t2
+  for(int i = 0, t = 0; i <= lo; i++) {
+    for(int j = 0; j < l1; j++) {
+      if(this->str[i + j] != e1.str[j]){  // no match
+        temp[t] = str[i]; // copy str char at this index
+        t++;
+        break;
+      } else if (j == l1 - 1) { // in case of match
+        for(int x = 0; x < l2; x++, t++) // replace it with new str
+          temp[t] = e2.str[x];
+
+        i += l1 - 1;
+      }
+    }
+  }
+
+  // get length of temp
+  int tl = 0;
+  while(temp[tl] != '\0') tl++;
+
+  // free and allocate new memory for str;
+  delete [] str;
+  this->str = new char[tl + 1];
+
+  // copy every thing from temp to str
+  for (;tl >= 0; tl--)
+    this->str[tl] = temp[tl];
+
+  delete[] temp; // free temp memory
+
+  return *this;
 }
-/*
+
 estring estring::toString(int x, int y)
 {
 	int l = 0;
@@ -746,7 +739,7 @@ estring estring::toString(int x, int y)
 	}
 	return e;
 }
-*/
+
 estring::~estring() {
   // free old memory
   delete [] str;
