@@ -413,11 +413,11 @@ bool estring::endsWith(const estring& str, int index) const {
 /**********************
     pad start method
 ***********************/
-estring estring::padStart(int len, const estring& str) {
+estring& estring::padStart(int len, const estring& str) {
   // get the length of this str
   int ol = this->length();
 
-  if (ol >= len) return this->str;
+  if (ol >= len) return *this;
 
   // get the length of parameter str
   int pl = str.length();
@@ -448,11 +448,11 @@ estring estring::padStart(int len, const estring& str) {
 /***********************
     pad end method
 ************************/
-estring estring::padEnd(int len, const char str[]) {
+estring& estring::padEnd(int len, const char str[]) {
   // get the length of my str
   int ol = this->length();
 
-  if (ol >= len) return this->str;
+  if (ol >= len) return *this;
 
   // get the length of parameter str
   int pl = 0;
@@ -475,14 +475,14 @@ estring estring::padEnd(int len, const char str[]) {
   // free t memory
   delete [] t;
 
-  return this->str;
+  return *this;
 }
 
-estring estring::padEnd(int len, const estring& str) {
+estring& estring::padEnd(int len, const estring& str) {
   // get the length of my str
   int ol = this->length();
 
-  if (ol >= len) return this->str;
+  if (ol >= len) return *this;
 
   // get the length of parameter str
   int pl = str.length();
@@ -504,13 +504,13 @@ estring estring::padEnd(int len, const estring& str) {
   // free t memory
   delete [] t;
 
-  return this->str;
+  return *this;
 }
 
 /***************************
   trim & trim right methods
 *****************************/
-estring estring::trim() {
+estring& estring::trim() {
   // get the index count of this str
 	int l = this->length() - 1, lss = 0;
 
@@ -543,7 +543,7 @@ estring estring::trim() {
 	return *this;
 }
 
-estring estring::trimRight(void){
+estring& estring::trimRight(void){
   // get index number
   int l = this->length() - 1;
 
@@ -561,21 +561,21 @@ estring estring::trimRight(void){
   // free t memory
   delete [] t;
 
-  return str;
+  return *this;
 }
 
 /***********************************
     to lower & upper case methods
 ************************************/
-estring estring::toLoweCase (void) {
+estring& estring::toLoweCase (void) {
   for(int i = 0; str[i] != '\0'; i++)    // for each char
     if(str[i] >= 'A' && str[i] <= 'Z')   // if it was capital
       str[i] += 32; // convert it to small
 
-  return this->str;
+  return *this;
 }
 
-estring estring::toUpperCase() {
+estring& estring::toUpperCase() {
   for(int i = 0; str[i] != '\0'; i++)    // for each char
     if(str[i] >= 'a' && str[i] <= 'z')   // if it was small
       str[i] -= 32; // convert it to capital
@@ -586,23 +586,23 @@ estring estring::toUpperCase() {
 /***********************
       slice method
 ************************/
-estring estring::slice(int x, int y) {
+estring& estring::slice(int x, int y) {
 	if (y == 0)
 		y = length();
-	if (x > y || (x < 0 && y != length()) || y > length())
-		return "Error";
-	char* temp;
+	if (x > y || (x < 0 && y != length()) || y > length()) return *this;
+
+	estring temp;
 	if (x < 0) {
-		temp = new char[-x + 1];
+		temp.str = new char[-x + 1];
 		for (int i = 0, j = x; y + j < y; i++, j++)
-			temp[i] = str[y + j];
-		temp[-x] = '\0';
+			temp.str[i] = str[y + j];
+		temp.str[-x] = '\0';
 	}
 	else {
-		temp = new char[y - x + 1];
+		temp.str = new char[y - x + 1];
 		for (int i = 0, j = x; j <= y; i++, j++)
-			temp[i] = str[j];
-		temp[y - x + 1] = '\0';
+			temp.str[i] = str[j];
+		temp.str[y - x + 1] = '\0';
 	}
 	return temp;
 }
@@ -610,7 +610,7 @@ estring estring::slice(int x, int y) {
 /*************************
       reverse method
 **************************/
-estring estring::reverse(void) {
+estring& estring::reverse(void) {
   // get index number
   int l = length() - 1;
 
@@ -622,13 +622,13 @@ estring estring::reverse(void) {
     str[i] = str[l - i];  // set correspondence char at index l - i to index i
     str[l - i] = t;   // set char at index l - i  to temp;
   }
-  return this->str;
+  return *this;
 }
 
 /***********************
       erase method
 ************************/
-estring estring::erase(int start_i, int end_i) {
+estring& estring::erase(int start_i, int end_i) {
   // get the length
   int l = this->length();
 
@@ -654,11 +654,11 @@ estring estring::erase(int start_i, int end_i) {
 /***********************
      replace method
 ************************/
-estring estring::replace(const estring& e1, const estring& e2) {
+estring& estring::replace(const estring& e1, const estring& e2) {
 	 // get the length of all strings
   int l1 = e1.length(), l2 = e2.length(), lo= this->length();
 
-  if (l1 > lo || l1 == 0) return this->str;
+  if (l1 > lo || l1 == 0) return *this;
 
   char *temp = this->str; // copy this str in temp
   // allocate new memory

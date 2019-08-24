@@ -16,26 +16,24 @@ class estring
     estring(const char str[]);
     estring(const estring& str);
 
-    // assignment operator overloading
+    /***************************
+        operator overloading
+    ****************************/
+      // assignment
     void operator = (const char str[]);
     void operator = (const estring& str);
-
-    // array index operator overloading
+      // array index
     char& operator[] (int index);
-
-    // plus equal operator overloading
+      // plus equal
     void operator += (const char str[]);
     void operator += (const estring& str);
-
-    // equality operator overloading
+      // equality
     bool operator == (const char str[]);
     bool operator == (const estring& str);
     friend bool operator == (const char str[],const estring& ob);
-
-    // not equal operator overloading
+      // not equal
     bool operator!=(const estring& e);
-
-    // cin >> & cout << overloading
+      // cin >> & cout <<
     friend ostream & operator << (ostream &out, const estring &str);
     friend istream & operator >> (istream &in,  estring &str);
 
@@ -45,7 +43,7 @@ class estring
     int length() const;//-------------------------------------> length method
 		int indexOf(const estring& e, int x = 0) const;//---------> index of method
   	int lastIndexOf(const estring& e, int x = 0) const;//-----> last index of method
-  	int count(const estring& e) const;//----------------> count method
+  	int count(const estring& e) const;//----------------------> count method
     int charCodeAt(int x) const;//----------------------------> char code at method
 		char charAt(int x) const;//-------------------------------> char at method
     bool includes(const char str[]) const;//------------------> includes method
@@ -56,17 +54,17 @@ class estring
   	/************************
           modify method
     *************************/
-    estring padStart(int len, const estring& e = " ");//> pad start method
-    estring padEnd(int len, const char str[] = " ");//--> pad end method
-    estring padEnd(int len, const estring& str);//------> pad end method
-    estring trim();//-----------------------------------> trim method
-    estring trimRight(void);//--------------------------> trim Right method
-    estring toLoweCase(void);//-------------------------> to lower case method
-  	estring toUpperCase();//----------------------------> to upper case method
-   	estring slice(int x, int y);//----------------------> slice method
-    estring reverse(void);//--------------------------> e_reverse method
-  	estring erase(int start_i, int end_i);//------------> erase method
-    estring replace(const estring& e1, const estring& e2);//replace method
+    estring& padStart(int len, const estring& e = " ");//> pad start method
+    estring& padEnd(int len, const char str[] = " ");//--> pad end method
+    estring& padEnd(int len, const estring& str);//------> pad end method
+    estring& trim();//-----------------------------------> trim method
+    estring& trimRight(void);//--------------------------> trim Right method
+    estring& toLoweCase(void);//-------------------------> to lower case method
+  	estring& toUpperCase();//----------------------------> to upper case method
+   	estring& slice(int x, int y);//----------------------> slice method
+    estring& reverse(void);//--------------------------> e_reverse method
+  	estring& erase(int start_i, int end_i);//------------> erase method
+    estring& replace(const estring& e1, const estring& e2);//replace method
 
 
     static estring toString(int x, int y = 10);
