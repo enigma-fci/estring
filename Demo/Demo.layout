@@ -2,19 +2,19 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\estring.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+	<File name="include\estring.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="393" topLine="21" />
+			<Cursor1 position="2253" topLine="47" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="82" topLine="0" />
+			<Cursor1 position="6708" topLine="134" />
 		</Cursor>
 	</File>
 	<File name="src\estring.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9109" topLine="85" />
+			<Cursor1 position="16797" topLine="546" />
 		</Cursor>
 		<Folding>
 			<Collapse line="2" />
@@ -24,33 +24,8 @@
 			<Collapse line="56" />
 			<Collapse line="80" />
 			<Collapse line="109" />
-			<Collapse line="140" />
-			<Collapse line="156" />
-			<Collapse line="168" />
-			<Collapse line="186" />
-			<Collapse line="202" />
-			<Collapse line="210" />
-			<Collapse line="234" />
-			<Collapse line="243" />
-			<Collapse line="266" />
-			<Collapse line="289" />
-			<Collapse line="315" />
-			<Collapse line="344" />
-			<Collapse line="374" />
-			<Collapse line="394" />
-			<Collapse line="415" />
-			<Collapse line="450" />
-			<Collapse line="480" />
-			<Collapse line="512" />
-			<Collapse line="545" />
-			<Collapse line="569" />
 			<Collapse line="577" />
-			<Collapse line="588" />
-			<Collapse line="612" />
 			<Collapse line="630" />
-			<Collapse line="656" />
-			<Collapse line="690" />
-			<Collapse line="709" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>

@@ -524,7 +524,7 @@ estring& estring::trim() {
 	for (; l >= 0, str[l] == ' '; l--);
 
   // if the string is only space
-  if(l = -1) {
+  if(l == -1) {
     delete [] temp;   // free temp memory
     this->str = new char [1];   // allocate only 1 char space
     this->str = "";   // set it to null char
@@ -587,11 +587,13 @@ estring& estring::toUpperCase() {
       slice method
 ************************/
 estring& estring::slice(int x, int y) {
-	if (y == 0)
-		y = length();
-	if (x > y || (x < 0 && y != length()) || y > length()) return *this;
-
 	estring temp;
+	if (!y) y = this->length() - 1;
+	else if (x > y || (x < 0 && y != length()) || y > length()) {
+    temp = *this;
+    return temp;
+	};
+
 	if (x < 0) {
 		temp.str = new char[-x + 1];
 		for (int i = 0, j = x; y + j < y; i++, j++)

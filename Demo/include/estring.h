@@ -61,8 +61,8 @@ class estring
     estring& trimRight(void);//--------------------------> trim Right method
     estring& toLoweCase(void);//-------------------------> to lower case method
   	estring& toUpperCase();//----------------------------> to upper case method
-   	estring& slice(int x, int y);//----------------------> slice method
-    estring& reverse(void);//--------------------------> e_reverse method
+   	estring& slice(int x, int y = 0);//------------------> slice method
+    estring& reverse(void);//----------------------------> reverse method
   	estring& erase(int start_i, int end_i);//------------> erase method
     estring& replace(const estring& e1, const estring& e2);//replace method
 

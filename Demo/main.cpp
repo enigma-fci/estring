@@ -10,6 +10,7 @@ int main()
   cout << "------------------constructor------------------" << endl;
   cout << "test1: " << test1 << endl;
   cout << "test2: " << test2 << endl;
+  cout << endl;
 
   // assignment operator
   test1 = "this is the new value of test";
@@ -17,6 +18,7 @@ int main()
   cout << "------------------assignment operator------------------" << endl;
   cout << "test1: " << test1 << endl;
   cout << "test2: " << test2 << endl;
+  cout << endl;
 
   // array index operator
   cout << "------------------array index operator------------------" << endl;
@@ -26,6 +28,7 @@ int main()
   cout << "test1[100]: " << test1[100] << endl;
   cout << "test1[-10]: " << test1[-10] << endl;
   cout << "test1[-50]: " << test1[-50] << endl;
+  cout << endl;
 
   // += operator
   test1 = "this is the new value of test";
@@ -33,17 +36,20 @@ int main()
   cout << "test1: " << test1 << endl;
   test1 += " and we add text by +=";
   cout << "new test1: " << test1 << endl;
+  cout << endl;
 
   // == operator
   test2 = "this is test 2";
   cout << "------------------== operator------------------" << endl;
   cout << "test1 == test2: " << (test1 == test2) << endl;
   cout << "test2 == \'this is test 2\':" << (test2 == "this is test 2") << endl;
+  cout << endl;
 
   // != operator
   cout << "------------------!= operator------------------" << endl;
   cout << "test1 != test2: " << (test1 != test2) << endl;
   cout << "test2 != \'this is test 2\':" << (test2 != "this is test 2") << endl;
+  cout << endl;
 
   // cin >> & cout <<
   cout << "------------------cin cout------------------" << endl;
@@ -51,11 +57,13 @@ int main()
   cin >> test1 >> test2;
   cout << "test1: " << test1 << endl;
   cout << "test2: " << test2 << endl;
+  cout << endl;
 
   // length
   cout << "------------------length------------------" << endl;
   cout << "test1: " << test1.length() << endl;
   cout << "test2: " << test2.length() << endl;
+  cout << endl;
 
   // indexOf
   cout << "------------------index of------------------" << endl;
@@ -65,6 +73,7 @@ int main()
   cout << "index of \'c\': " << test1.indexOf("c") << endl;
   cout << "index of \'d\': " << test1.indexOf("d") << endl;
   cout << "index of \'cat\': " << test1.indexOf("cat") << endl;
+  cout << endl;
 
   // lastIndexOf
   cout << "------------------last index of------------------" << endl;
@@ -74,6 +83,7 @@ int main()
   cout << "last index of \'c\': " << test1.lastIndexOf("c") << endl;
   cout << "last index of \'d\': " << test1.lastIndexOf("d") << endl;
   cout << "last index of \'cat\': " << test1.lastIndexOf("cat") << endl;
+  cout << endl;
 
   // count
   cout << "------------------count------------------" <<endl;
@@ -82,6 +92,7 @@ int main()
   cout << "count of \'hi\': " << test1.count("hi") << endl;
   cout << "count of \'a\': " << test1.count("a") << endl;
   cout << "count of \'b\': " << test1.count("b") << endl;
+  cout << endl;
 
   // char Code At
   cout << "------------------char code at------------------" << endl;
@@ -90,7 +101,7 @@ int main()
   cout << "char code at index 2: " << test1.charCodeAt(2) << endl;
   cout << "char code at index -3: " << test1.charCodeAt(-3) << endl;
   cout << "char code at index 100: " << test1.charCodeAt(100) << endl;
-
+  cout << endl;
 
   // char At
   cout << "------------------char at------------------" << endl;
@@ -99,7 +110,7 @@ int main()
   cout << "char at index 2: " << test1.charAt(2) << endl;
   cout << "char at index -3: " << test1.charAt(-3) << endl;
   cout << "char at index 100: " << test1.charAt(100) << endl;
-
+  cout << endl;
 
   // includes
   cout << "------------------includes------------------" << endl;
@@ -110,8 +121,9 @@ int main()
   cout << "does it includes \'a\': " << test1.includes("a") << endl;
   cout << "does it includes \'b\': " << test1.includes("b") << endl;
   cout << "does it includes \'c\': " << test1.includes("c") << endl;
+  cout << endl;
 
-  // // endsWith
+  // endsWith
   cout << "------------------endsWith------------------" << endl;
   cout << "in test 1: \'" << test1 << '\'' << endl;
   cout << "does it endsWith \'cat\': " << test1.endsWith("cat") << endl;
@@ -120,6 +132,69 @@ int main()
   cout << "does it endsWith \'a\': " << test1.endsWith("a") << endl;
   cout << "does it endsWith \'b\': " << test1.endsWith("b") << endl;
   cout << "does it endsWith \'c\': " << test1.endsWith("c") << endl;
+  cout << endl;
+
+  // pad start
+  cout << "------------------pad start------------------" << endl;
+  test1 = "test";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "pad start test1 with 012345689: " << test1.padStart(10, "0123456789") << endl;
+  cout << endl;
+
+  // pad end
+  cout << "------------------pad end------------------" << endl;
+  test1 = "test";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "pad end test1 with 012345689: " << test1.padEnd(10, "0123456789") << endl;
+  cout << endl;
+
+  // pad start
+  cout << "------------------trim------------------" << endl;
+  test1 = "                      test                ";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "trim test1: \'" << test1.trim() << '\'' << endl;
+  cout << endl;
+
+  // pad start
+  cout << "------------------trim right------------------" << endl;
+  test1 = "                      test                      ";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "trim right test1: \'" << test1.trimRight() << '\'' << endl;
+  cout << endl;
+
+  // to lower case
+  cout << "------------------to lower case------------------" << endl;
+  test1 = "Hi tHiS Is TeSt 1";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "to lower case test1: " << test1.toLoweCase() << endl;
+  cout << endl;
+
+  // pad start
+  cout << "------------------to upper case------------------" << endl;
+  test1 = "Hi tHiS Is TeSt 1";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "pad start test1 with 012345689: " << test1.toUpperCase() << endl;
+  cout << endl;
+
+/*  // pad start
+  cout << "------------------slice------------------" << endl;
+  test1 = "The quick brown fox jumps over the lazy dog.";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "slice from 31 test1: " << test1.slice(31) << endl;
+  cout << "slice from 4 to 19 test1: " << test1.slice(4, 19) << endl;
+  cout << "slice from -4 test1: " << test1.slice(-4) << endl;
+  cout << "slice from -9 to -5 test1: " << test1.slice(-9, -5) << endl;
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << endl;
+
+*/
+
+  // reverse
+  cout << "------------------reverse------------------" << endl;
+  test1 = "this is test text for reverse method";
+  cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "reverse test1: " << test1.reverse() << endl;
+  cout << endl;
 
 
 
