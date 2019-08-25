@@ -514,21 +514,21 @@ estring& estring::trim() {
   // get the index count of this str
 	int l = this->length() - 1, lss = 0;
 
-	// copy this str to temp
-	char* temp = this->str;
-
 	// get first index of string not space and store it at lss
-	for (int i = 0; i < l, str[i] == ' '; i++, lss++);
+	for (; str[lss] == ' ' && lss <= l; lss++);
 
   // get the last index of string not space and store it at lss
-	for (; l >= 0, str[l] == ' '; l--);
+	for(;l >= 0 && str[l] == ' '; l--);
+
+  // copy this str to temp
+	char* temp = this->str;
 
   // if the string is only space
   if(l == -1) {
-    delete [] temp;   // free temp memory
+    delete [] temp;             // free temp memory
     this->str = new char [1];   // allocate only 1 char space
-    this->str = "";   // set it to null char
-    return *this;     // return and end the function
+    this->str[0] = '\0';        // set it to null char
+    return *this;               // return and end the function
   }
 
 	this->str = new char[++l - lss + 1]; // allocate new memory
@@ -547,8 +547,7 @@ estring& estring::trimRight(void){
   // get index number
   int l = this->length() - 1;
 
-  for(;l >= 0 && str[l] == ' '; l--)
-    str[l] = '\0';
+  for(;l >= 0 && str[l] == ' '; l--);
 
   char *t = str;
   str = new char[l + 2];
@@ -586,26 +585,23 @@ estring& estring::toUpperCase() {
 /***********************
       slice method
 ************************/
-estring& estring::slice(int x, int y) {
+estring estring::slice(int x, int y) {
 	estring temp;
-	if (!y) y = this->length() - 1;
-	else if (x > y || (x < 0 && y != length()) || y > length()) {
+	int l = this->length();
+
+	if (!y) y = l;
+	if (x < 0) x = l + x;
+	if (y < 0) y = l + y;
+	if (x > y || y > l) {
     temp = *this;
     return temp;
 	};
 
-	if (x < 0) {
-		temp.str = new char[-x + 1];
-		for (int i = 0, j = x; y + j < y; i++, j++)
-			temp.str[i] = str[y + j];
-		temp.str[-x] = '\0';
-	}
-	else {
-		temp.str = new char[y - x + 1];
-		for (int i = 0, j = x; j <= y; i++, j++)
-			temp.str[i] = str[j];
-		temp.str[y - x + 1] = '\0';
-	}
+  temp.str = new char[y - x + 1];
+  for (int i = 0, j = x; j < y; i++, j++)
+    temp.str[i] = str[j];
+  temp.str[y - x] = '\0';
+
 	return temp;
 }
 
@@ -613,17 +609,8 @@ estring& estring::slice(int x, int y) {
       reverse method
 **************************/
 estring& estring::reverse(void) {
-  // get index number
-  int l = length() - 1;
-
-  char t;
-  // loop and swap each char in the first half whit it correspondence
-  for(int i = 0; i <= l / 2; i++) {
-    // simple swap
-    t = str[i];     // store char at index i in temp variable
-    str[i] = str[l - i];  // set correspondence char at index l - i to index i
-    str[l - i] = t;   // set char at index l - i  to temp;
-  }
+  // loop to swap first half with other half
+  for(int i = -1, l = length() - 1; i < l / 2; i++, str[i] += str[l - i],  str[l - i] = str[i] - str[l - i], str[i] -= str[l - i]);
   return *this;
 }
 
@@ -692,6 +679,7 @@ estring& estring::replace(const estring& e1, const estring& e2) {
 *************************/
 estring estring::toString(int x, int y) {
   estring e;
+
   if(!x){
     e = "0";
     return e;
@@ -701,7 +689,7 @@ estring estring::toString(int x, int y) {
 	for(l = 0;x > pow(y, l); l++);
 
   e = new char[l + 1];
-	e.str[l--] = '\0';
+  e.str[l--] = '\0';
 
 	for (int i = x % y; x; l--, x /= y, i = x % y)
 		e.str[l] = i < 10? i + 48 : i + 87;
