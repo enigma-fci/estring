@@ -1,4 +1,12 @@
 #include "estring.h"
+/******************
+      power
+*******************/
+int estring::power(int base, int p) {
+  int sum = 1;
+  for(;p ;p--, sum *= base);
+  return sum;
+}
 
 /********************
     constructors
@@ -200,7 +208,7 @@ bool estring::operator!= (const estring& e) {
 /**************************
     cout << overloading
 ***************************/
-ostream & operator << (ostream &out, const estring &str) {
+std::ostream & operator << (std::ostream &out, const estring &str) {
   out << str.str;
   return out;
 }
@@ -208,7 +216,7 @@ ostream & operator << (ostream &out, const estring &str) {
 /*************************
     cin >> overloading
 **************************/
-istream & operator >> (istream &in, estring &str) {
+std::istream & operator >> (std::istream &in, estring &str) {
   char t[100];
   in.getline(t, 100);
 
@@ -686,7 +694,7 @@ estring estring::toString(int x, int y) {
   }
 
 	int l;
-	for(l = 0;x > pow(y, l); l++);
+	for(l = 0;x > e.power(y, l); l++);
 
   e = new char[l + 1];
   e.str[l--] = '\0';
