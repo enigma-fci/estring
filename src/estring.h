@@ -2,14 +2,14 @@
 #define ESTRING_H
 
 #include <iostream>
-#include <cmath>
-
-using namespace std;
 
 class estring
 {
   private:
     char *str;
+
+    int power(int base, int p);
+
   public:
     // constructors
     estring();
@@ -34,8 +34,9 @@ class estring
       // not equal
     bool operator!=(const estring& e);
       // cin >> & cout <<
-    friend ostream & operator << (ostream &out, const estring &str);
-    friend istream & operator >> (istream &in,  estring &str);
+    friend std::ostream & operator << (std::ostream &out, const estring &str);
+    friend std::istream & operator >> (std::istream &in,  estring &str);
+
 
     /*********************
           Query method
@@ -70,6 +71,10 @@ class estring
     static estring toString(int x, int y = 10);
 
     ~estring();
+
 };
+
+
+
 
 #endif // ESTRING_H
