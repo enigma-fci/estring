@@ -711,3 +711,167 @@ estring::~estring() {
   delete [] str;
   str = 0;
 }
+
+
+
+/*********************
+  not done yet
+**********************/
+/**************************************
+plus operator overloading
+**************************************/
+estring estring::operator + (const char str[]){
+	char *a;
+	int l=0;
+	while(this->str[l]!='\0')l++;
+	int pl=0;
+	while (str[pl]!='\0')pl++;
+	a=new char[l+pl];
+	while(l >= 0) {
+    a[l] = this->str[l];
+    l--;
+  }
+  while(pl >= 0) {
+    a[l+pl] = str[pl];
+    pl--;
+  }
+  return a;
+}
+
+estring estring::operator + (const estring& str){
+	estring a;
+	int l=0,r,q;
+	while(this->str[l]!='\0')l++;
+	int pl=0;
+	while (str.str[pl]!='\0')pl++;
+	r=l;
+	q=pl;
+	a=new char[r+q+1];
+	while(l >= 0) {
+    a.str[l] = this->str[l];
+    l--;
+  }
+  while(pl >= 0) {
+    a.str[r+pl] = str.str[pl];
+    pl--;
+  }
+  a.str[r+q+1]='\0';
+
+  return a;
+}
+
+
+
+/********************************
+concate function
+********************************/
+estring estring::concate(estring& str){
+	estring a;
+	int l=0,r;
+	while(this->str[l]!='\0')l++;
+	int pl=0;
+	while (str.str[pl]!='\0')pl++;
+	r=l;
+
+	a=new char[r+pl+3];
+	while(l >= 0) {
+    a.str[l] = this->str[l];
+    l--;
+  }
+  while(pl >= 0) {
+    a.str[r+pl] = str.str[pl];
+    pl--;
+  }
+  return a;
+
+}
+
+estring estring::concate(char b,estring& str,char c){
+
+	estring a;
+
+	int l=0,r=0,q=0;
+	while(this->str[l]!='\0')l++;
+	int pl=0;
+	while (str.str[pl]!='\0')pl++;
+	r=l;
+	q=pl;
+	a=new char[q+r+3];
+	while(l > 0) {
+		l--;
+    a.str[l] = this->str[l];
+
+  }
+
+
+   a.str[r]=b;
+
+
+  while(pl > 0) {
+  	pl--;
+    a.str[r+pl+1] = str.str[pl];
+
+  }
+a.str[q+r+1]=c;
+ a.str[q+r+2]='\0';
+
+  return a;
+}
+
+/*************************
+supstring function
+***********************/
+estring estring::supstring (int number){
+	int l=0,r=0,n,m;
+	n=number;
+
+	estring a;
+	while(this->str[l]!='\0')l++;
+	m=l-number;
+	a=new char[m+1];
+	for(int i=number;number<=l;number++){
+		a.str[r]=this->str[number];
+		r++;
+	}
+	a.str[l-n]='\0';
+	 while(m >= 0) {
+    this->str[m] = a.str[m];
+    m--;
+  }
+  return *this;
+}
+
+
+
+/*************************
+repeat function
+**************************/
+estring estring::repeat(int number){
+	estring a;
+	int l = 0,r,q=0,m,p;
+  while(this->str[l]!='\0')l++;
+  m=p=r=l;
+  a=new char[(number*r)+(number-1)];
+  for(int i=0;i<number;i++){
+  	while(l >=q ) {
+		l--;
+		p--;
+    a.str[l] = this->str[p];
+
+  }
+
+  q=r+1;
+  l=r+m+1;
+  r=r+m+1;
+  p=m;
+
+  }
+  a.str[(number*m)+(number-1)]='\0';
+  for(int i=0;i<number-1;i++){
+  	int v=m;
+  a.str[m]=' ';
+  m=m+v+1;}
+
+  return a;
+}
+

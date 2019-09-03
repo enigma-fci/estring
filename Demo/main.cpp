@@ -211,6 +211,8 @@ int main()
   cout << "to string octal : " << estring::toString(var, 8) << endl;
   cout << "to string hexadecimal : " << estring::toString(var, 16) << endl;
   cout << endl;
-
+  test1 = test2 + " and " + test2 + "the end" + test1;
+  //cout << test1.supstring(31) << endl;
+  cout << test1 << endl;
   return 0;
 }
