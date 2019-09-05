@@ -85,6 +85,69 @@ void estring::operator = (const estring& str) {
 char& estring::operator[] (int index)  {return str[index];}
 
 /**************************************
+    plus operator overloading
+**************************************/
+estring estring::operator + (const char str[]){
+	int l = this->length(); // get the length of this str
+
+	int pl=0; // get the length of parameter str
+	while (str[pl]!='\0')pl++;
+
+	// allocate new memory for new string
+	estring temp;
+	temp.str = new char[l + pl + 1];
+
+
+  // copy char from this str to temp
+  for(int i = 0; i < l; i++)
+    temp.str[i] = this->str[i];
+
+  // copy char from parameter str to temp
+  for(int i = l, j = 0; i <= l + pl; i++, j++)
+    temp.str[i] = str[j];
+
+  return temp;
+}
+
+estring estring::operator + (const estring& str){
+  int l = this->length(); // get length of this str
+  int pl = str.length();  // get length of parameter str
+
+  estring temp;
+  temp.str = new char[l + pl + 1];
+
+  // copy char from this str to temp
+  for(int i = 0; i < l; i++)
+    temp.str[i] = this->str[i];
+
+  // copy char from parameter str to temp
+  for(int i = l, j = 0; i <= l + pl; i++, j++)
+    temp.str[i] = str.str[j];
+
+  return temp;
+}
+
+estring operator + (const char str[], const estring& obstr) {
+  int l = 0;  // length of str
+  while(str[l] != 0) l++;
+
+  int pl = obstr.length(); // length of obstr
+
+  estring temp;
+  temp.str = new char[l + pl + 1];
+
+  // copy char from this str to temp
+  for(int i = 0; i < l; i++)
+    temp.str[i] = str[i];
+
+  // copy char from parameter str to temp
+  for(int i = l, j = 0; i <= l + pl; i++, j++)
+    temp.str[i] = obstr.str[j];
+
+  return temp;
+}
+
+/**************************************
     plus equal operator overloading
 ***************************************/
 void estring::operator += (const char str[]) {
@@ -689,17 +752,18 @@ estring& estring::replace(const estring& e1, const estring& e2) {
 estring estring::toString(int x, int y) {
   estring e;
 
-  if(!x){
+  if(!x){ // x = 0 then return 0
     e = "0";
     return e;
   }
 
-	int l;
+	int l; // find number of char required for the number
 	for(l = 0;x > e.power(y, l); l++);
 
-  e = new char[l + 1];
+  // allocate new memory
+  e.str = new char[l + 1];
   e.str[l--] = '\0';
-
+  // convert to the base and save it in e
 	for (int i = x % y; x; l--, x /= y, i = x % y)
 		e.str[l] = i < 10? i + 48 : i + 87;
 
@@ -717,50 +781,6 @@ estring::~estring() {
 /*********************
   not done yet
 **********************/
-/**************************************
-plus operator overloading
-**************************************/
-estring estring::operator + (const char str[]){
-	char *a;
-	int l=0;
-	while(this->str[l]!='\0')l++;
-	int pl=0;
-	while (str[pl]!='\0')pl++;
-	a=new char[l+pl];
-	while(l >= 0) {
-    a[l] = this->str[l];
-    l--;
-  }
-  while(pl >= 0) {
-    a[l+pl] = str[pl];
-    pl--;
-  }
-  return a;
-}
-
-estring estring::operator + (const estring& str){
-	estring a;
-	int l=0,r,q;
-	while(this->str[l]!='\0')l++;
-	int pl=0;
-	while (str.str[pl]!='\0')pl++;
-	r=l;
-	q=pl;
-	a=new char[r+q+1];
-	while(l >= 0) {
-    a.str[l] = this->str[l];
-    l--;
-  }
-  while(pl >= 0) {
-    a.str[r+pl] = str.str[pl];
-    pl--;
-  }
-  a.str[r+q+1]='\0';
-
-  return a;
-}
-
-operator + (estring x, estring y);
 
 /********************************
 concate function

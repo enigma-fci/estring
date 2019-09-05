@@ -24,6 +24,10 @@ class estring
     void operator = (const estring& str);
       // array index
     char& operator[] (int index);
+      // plus
+    estring operator + (const char str[]);
+    estring operator + (const estring& str);
+    friend estring operator + (const char str[], const estring& obstr);
       // plus equal
     void operator += (const char str[]);
     void operator += (const estring& str);
@@ -75,9 +79,6 @@ class estring
     /**************************
           not done yet
     ***************************/
-    estring operator + (const char str[]);
-    estring operator + (const estring& str);
-    friend operator + (estring x, estring y);
     estring concate(estring& str);
     estring concate(char b,estring& str,char c);
     estring supstring (int number);
