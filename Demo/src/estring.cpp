@@ -676,6 +676,29 @@ estring estring::slice(int x, int y) {
 
 	return temp;
 }
+/*************************
+    substring function
+**************************/
+estring estring::substring (int start_i, int end_i) {
+  estring temp;
+
+  int index = this->length() - 1; // get this str index count
+  if(end_i == -1 || end_i > index) end_i = index;
+
+  // check safety conditions
+  if (start_i < 0 || end_i < 0 || start_i == end_i || start_i > end_i)
+    return "";
+
+  // allocate new memory
+  temp.str = new char[end_i - start_i + 1];
+  temp.str[start_i + end_i] = '\0';
+
+  // copy each char from start to end into temp
+  for(int i = 0, j = start_i; j <= end_i; j++, i++)
+    temp.str[i] = this->str[j];
+
+  return temp;
+}
 
 /*************************
       repeat method
@@ -854,28 +877,5 @@ a.str[q+r+1]=c;
  a.str[q+r+2]='\0';
 
   return a;
-}
-
-/*************************
-supstring function
-***********************/
-estring estring::supstring (int number){
-	int l=0,r=0,n,m;
-	n=number;
-
-	estring a;
-	while(this->str[l]!='\0')l++;
-	m=l-number;
-	a=new char[m+1];
-	for(int i=number;number<=l;number++){
-		a.str[r]=this->str[number];
-		r++;
-	}
-	a.str[l-n]='\0';
-	 while(m >= 0) {
-    this->str[m] = a.str[m];
-    m--;
-  }
-  return *this;
 }
 

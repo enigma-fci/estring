@@ -67,6 +67,7 @@ class estring
     estring& toLoweCase(void);//-------------------------> to lower case method
   	estring& toUpperCase();//----------------------------> to upper case method
    	estring slice(int x, int y = 0);//-------------------> slice method
+    estring substring (int start_i, int end_i = -1);//---> substring method
    	estring repeat(int times);//-------------------------> repeat method
     estring& reverse(void);//----------------------------> reverse method
   	estring& erase(int start_i, int end_i);//------------> erase method
@@ -81,7 +82,6 @@ class estring
     ***************************/
     estring concate(estring& str);
     estring concate(char b,estring& str,char c);
-    estring supstring (int number);
 };
 
 

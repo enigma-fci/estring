@@ -195,7 +195,16 @@ int main()
   cout << "slice from 4 to 19 test1: \'" << test1.slice(4, 19) << '\'' << endl;
   cout << "slice from -4 test1: \'" << test1.slice(-4) << '\'' << endl;
   cout << "slice from -9 to -5 test1: \'" << test1.slice(-9, -5) << '\'' << endl;
+  cout << "test 1: \'" << test1 << '\'' << endl;
+  cout << endl;
+
+  // substring
+  cout << "------------------substring------------------" << endl;
+  test1 = "The quick brown fox jumps over the lazy dog.";
   cout << "in test 1: \'" << test1 << '\'' << endl;
+  cout << "substring from 31 test1: \'" << test1.slice(31) << '\'' << endl;
+  cout << "substring from 4 to 19 test1: \'" << test1.slice(4, 19) << '\'' << endl;
+  cout << "test 1: \'" << test1 << '\'' << endl;
   cout << endl;
 
   // repeat
@@ -233,9 +242,6 @@ int main()
   cout << "to string hexadecimal : " << estring::toString(var, 16) << endl;
   cout << endl;
 
-
-  test1 = "this is";
-  cout << test1.repeat(5) << endl;
 
   return 0;
 }
