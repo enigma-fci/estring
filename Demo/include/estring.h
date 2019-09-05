@@ -76,12 +76,6 @@ class estring
     static estring toString(int x, int y = 10);
 
     ~estring();
-
-    /**************************
-          not done yet
-    ***************************/
-    estring concate(estring& str);
-    estring concate(char b,estring& str,char c);
 };
 
 

@@ -242,6 +242,5 @@ int main()
   cout << "to string hexadecimal : " << estring::toString(var, 16) << endl;
   cout << endl;
 
-
   return 0;
 }
