@@ -77,6 +77,7 @@ class estring
     ***************************/
     estring operator + (const char str[]);
     estring operator + (const estring& str);
+    friend operator + (estring x, estring y);
     estring concate(estring& str);
     estring concate(char b,estring& str,char c);
     estring supstring (int number);

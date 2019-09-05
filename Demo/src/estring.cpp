@@ -760,7 +760,7 @@ estring estring::operator + (const estring& str){
   return a;
 }
 
-
+operator + (estring x, estring y);
 
 /********************************
 concate function
