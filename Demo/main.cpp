@@ -30,6 +30,17 @@ int main()
   cout << "test1[-50]: " << test1[-50] << endl;
   cout << endl;
 
+  // plus operator
+  cout << "------------------plus operator------------------" << endl;
+  test1 = "this is test 1";
+  test2 = "this is test 2";
+  cout << "test 1 " << test1 << endl;
+  cout << "test 2 " << test2 << endl;
+  cout << "test1 + hi: " << test1 + "hi" << endl;
+  cout << "hi + test1: " << "hi" + test1 << endl;
+  cout << "test1 + and + test2: " << test1 + " and " + test2 << endl;
+  cout << endl;
+
   // += operator
   test1 = "this is the new value of test";
   cout << "------------------+= operator------------------" << endl;
@@ -187,6 +198,16 @@ int main()
   cout << "in test 1: \'" << test1 << '\'' << endl;
   cout << endl;
 
+  // repeat
+  cout << "------------------repeat------------------" << endl;
+  test1 = "Hi this is test 1.";
+  cout << "in test 1: " << test1 << endl;
+  cout << "repeat test1 1 time: " << test1.repeat(1) << endl;
+  cout << "repeat test1 2 times: " << test1.repeat(2) << endl;
+  cout << "repeat test1 3 times: " << test1.repeat(3) << endl;
+  cout << "test 1: \'" << test1 << '\'' << endl;
+  cout << endl;
+
   // reverse
   cout << "------------------reverse------------------" << endl;
   test1 = "this is test text for reverse method";
@@ -211,8 +232,10 @@ int main()
   cout << "to string octal : " << estring::toString(var, 8) << endl;
   cout << "to string hexadecimal : " << estring::toString(var, 16) << endl;
   cout << endl;
-  test1 = test2 + " and " + test2 + "the end" + test1;
-  //cout << test1.supstring(31) << endl;
-  cout << test1 << endl;
+
+
+  test1 = "this is";
+  cout << test1.repeat(5) << endl;
+
   return 0;
 }
