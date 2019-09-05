@@ -678,6 +678,24 @@ estring estring::slice(int x, int y) {
 }
 
 /*************************
+      repeat method
+**************************/
+estring estring::repeat(int times) {
+	int l = this->length(); // get this length
+	int total_len = l * times; // the total length of new str
+
+  estring temp; // allocate new space with right size
+  temp.str = new char[total_len + 1];
+
+  for (int i = 0, j = 0; i < total_len; i++, j = i % l)
+    temp.str[i] = this->str[j];
+
+  temp.str[total_len] = '\0';
+  return temp;
+}
+
+
+/*************************
       reverse method
 **************************/
 estring& estring::reverse(void) {
@@ -859,39 +877,5 @@ estring estring::supstring (int number){
     m--;
   }
   return *this;
-}
-
-
-
-/*************************
-repeat function
-**************************/
-estring estring::repeat(int number){
-	estring a;
-	int l = 0,r,q=0,m,p;
-  while(this->str[l]!='\0')l++;
-  m=p=r=l;
-  a=new char[(number*r)+(number-1)];
-  for(int i=0;i<number;i++){
-  	while(l >=q ) {
-		l--;
-		p--;
-    a.str[l] = this->str[p];
-
-  }
-
-  q=r+1;
-  l=r+m+1;
-  r=r+m+1;
-  p=m;
-
-  }
-  a.str[(number*m)+(number-1)]='\0';
-  for(int i=0;i<number-1;i++){
-  	int v=m;
-  a.str[m]=' ';
-  m=m+v+1;}
-
-  return a;
 }
 

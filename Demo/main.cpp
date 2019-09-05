@@ -198,6 +198,16 @@ int main()
   cout << "in test 1: \'" << test1 << '\'' << endl;
   cout << endl;
 
+  // repeat
+  cout << "------------------repeat------------------" << endl;
+  test1 = "Hi this is test 1.";
+  cout << "in test 1: " << test1 << endl;
+  cout << "repeat test1 1 time: " << test1.repeat(1) << endl;
+  cout << "repeat test1 2 times: " << test1.repeat(2) << endl;
+  cout << "repeat test1 3 times: " << test1.repeat(3) << endl;
+  cout << "test 1: \'" << test1 << '\'' << endl;
+  cout << endl;
+
   // reverse
   cout << "------------------reverse------------------" << endl;
   test1 = "this is test text for reverse method";
@@ -222,6 +232,10 @@ int main()
   cout << "to string octal : " << estring::toString(var, 8) << endl;
   cout << "to string hexadecimal : " << estring::toString(var, 16) << endl;
   cout << endl;
+
+
+  test1 = "this is";
+  cout << test1.repeat(5) << endl;
 
   return 0;
 }
