@@ -85,6 +85,69 @@ void estring::operator = (const estring& str) {
 char& estring::operator[] (int index)  {return str[index];}
 
 /**************************************
+    plus operator overloading
+**************************************/
+estring estring::operator + (const char str[]){
+	int l = this->length(); // get the length of this str
+
+	int pl=0; // get the length of parameter str
+	while (str[pl]!='\0')pl++;
+
+	// allocate new memory for new string
+	estring temp;
+	temp.str = new char[l + pl + 1];
+
+
+  // copy char from this str to temp
+  for(int i = 0; i < l; i++)
+    temp.str[i] = this->str[i];
+
+  // copy char from parameter str to temp
+  for(int i = l, j = 0; i <= l + pl; i++, j++)
+    temp.str[i] = str[j];
+
+  return temp;
+}
+
+estring estring::operator + (const estring& str){
+  int l = this->length(); // get length of this str
+  int pl = str.length();  // get length of parameter str
+
+  estring temp;
+  temp.str = new char[l + pl + 1];
+
+  // copy char from this str to temp
+  for(int i = 0; i < l; i++)
+    temp.str[i] = this->str[i];
+
+  // copy char from parameter str to temp
+  for(int i = l, j = 0; i <= l + pl; i++, j++)
+    temp.str[i] = str.str[j];
+
+  return temp;
+}
+
+estring operator + (const char str[], const estring& obstr) {
+  int l = 0;  // length of str
+  while(str[l] != 0) l++;
+
+  int pl = obstr.length(); // length of obstr
+
+  estring temp;
+  temp.str = new char[l + pl + 1];
+
+  // copy char from this str to temp
+  for(int i = 0; i < l; i++)
+    temp.str[i] = str[i];
+
+  // copy char from parameter str to temp
+  for(int i = l, j = 0; i <= l + pl; i++, j++)
+    temp.str[i] = obstr.str[j];
+
+  return temp;
+}
+
+/**************************************
     plus equal operator overloading
 ***************************************/
 void estring::operator += (const char str[]) {
@@ -613,6 +676,47 @@ estring estring::slice(int x, int y) {
 
 	return temp;
 }
+/*************************
+    substring function
+**************************/
+estring estring::substring (int start_i, int end_i) {
+  estring temp;
+
+  int index = this->length() - 1; // get this str index count
+  if(end_i == -1 || end_i > index) end_i = index;
+
+  // check safety conditions
+  if (start_i < 0 || end_i < 0 || start_i == end_i || start_i > end_i)
+    return "";
+
+  // allocate new memory
+  temp.str = new char[end_i - start_i + 1];
+  temp.str[start_i + end_i] = '\0';
+
+  // copy each char from start to end into temp
+  for(int i = 0, j = start_i; j <= end_i; j++, i++)
+    temp.str[i] = this->str[j];
+
+  return temp;
+}
+
+/*************************
+      repeat method
+**************************/
+estring estring::repeat(int times) {
+	int l = this->length(); // get this length
+	int total_len = l * times; // the total length of new str
+
+  estring temp; // allocate new space with right size
+  temp.str = new char[total_len + 1];
+
+  for (int i = 0, j = 0; i < total_len; i++, j = i % l)
+    temp.str[i] = this->str[j];
+
+  temp.str[total_len] = '\0';
+  return temp;
+}
+
 
 /*************************
       reverse method
@@ -689,17 +793,18 @@ estring& estring::replace(const estring& e1, const estring& e2) {
 estring estring::toString(int x, int y) {
   estring e;
 
-  if(!x){
+  if(!x){ // x = 0 then return 0
     e = "0";
     return e;
   }
 
-	int l;
+	int l; // find number of char required for the number
 	for(l = 0;x > e.power(y, l); l++);
 
-  e = new char[l + 1];
+  // allocate new memory
+  e.str = new char[l + 1];
   e.str[l--] = '\0';
-
+  // convert to the base and save it in e
 	for (int i = x % y; x; l--, x /= y, i = x % y)
 		e.str[l] = i < 10? i + 48 : i + 87;
 
